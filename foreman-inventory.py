@@ -87,10 +87,13 @@ def main():
     with open(args.config) as fd:
         conf = yaml.load(fd)
 
+    if 'foreman' not in conf:
+        conf['foreman'] = {}
+
     foreman = Foreman(
-        conf['foreman']['url'],
-        conf['foreman']['username'],
-        conf['foreman']['password'],
+        conf['foreman'].get('url', 'http://localhost'),
+        conf['foreman'].get('username'),
+        conf['foreman'].get('password')
     )
 
     if args.host:
