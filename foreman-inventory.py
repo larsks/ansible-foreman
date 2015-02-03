@@ -68,7 +68,7 @@ class Foreman(object):
             else:
                 hg = self.hgid[hgid]
 
-            hg['hosts'].append(host['host'])
+            hg['hosts'].append(host['host']['name'])
             self.hosts[host['host']['name']] = hg
 
 
