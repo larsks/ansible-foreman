@@ -79,6 +79,10 @@ def parse_args():
     p.add_argument('--list',
                    action='store_true')
     p.add_argument('--host')
+    p.add_argument('--hosts', '--hostnames',
+                   action='store_true')
+    p.add_argument('--groups', '--hostgroups',
+                   action='store_true')
     return p.parse_args()
 
 
@@ -102,8 +106,10 @@ def main():
     elif args.list:
         print json.dumps(foreman.hostgroups,
                          indent=2)
-    else:
+    elif args.hosts:
         print '\n'.join(foreman.hosts.keys())
+    else:
+        print '\n'.join(foreman.hostgroups.keys())
 
 
 if __name__ == '__main__':
