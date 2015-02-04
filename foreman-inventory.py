@@ -47,7 +47,9 @@ class Foreman(object):
         for hg in r.json():
             this = {
                 'hosts': [],
-                'vars': hg['hostgroup']['parameters'],
+                'vars': dict((k.replace('::', '_'), v)
+                             for k, v in
+                             hg['hostgroup']['parameters'].items()),
             }
             self.hostgroups[hg['hostgroup']['name']] = this
             self.hgid[hg['hostgroup']['id']] = this
